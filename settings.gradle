@@ -1,0 +1,3 @@
+rootProject.name = 'Chat_Project_Grad'
+include ('lib', 'client', 'server')
+

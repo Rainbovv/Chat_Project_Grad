@@ -1,0 +1,106 @@
+plugins {
+    id 'java'
+
+    id "io.freefair.aspectj.post-compile-weaving" version "5.3.0"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.6'
+
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.6'
+}
+
+subprojects {
+    apply plugin: 'java'
+}
+
+project(':lib') {
+    jar {
+        dependsOn('dependencies')
+        from {configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
+    }
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.6'
+        implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.6'
+    }
+    sourceSets {
+        main {
+            java {
+                srcDir '../src/main/java'
+                include 'lib/**'
+            }
+        }
+    }
+}
+
+project(':server') {
+    jar {
+        dependsOn('dependencies')
+        from {configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
+        manifest {
+            attributes(
+                    'Main-Class': 'server.ServerChatApp'
+            )
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        implementation project(':lib')
+    }
+    sourceSets {
+        main {
+            java {
+                srcDir '../src/main/java'
+                include 'server/**'
+            }
+        }
+    }
+}
+
+project(':client') {
+    jar {
+        dependsOn("dependencies")
+        from {configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
+        manifest {
+            attributes(
+                    'Main-Class': 'client.ClientChatApp'
+            )
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        implementation project(':lib')
+    }
+    sourceSets {
+        main {
+            java {
+                srcDir '../src/main/java'
+                include 'client/**'
+            }
+        }
+    }
+}
+
+//task (anchorHttpServerJar, dependsOn: 'classes', type: Jar) {
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//    from sourceSets.test.output
+//    archivesBaseName = 'Gradle'
+//    manifest {
+//        attributes ('Main-Class': 'server.Server')
+//    }
+//    exclude 'META-INF/.RSA', 'META-INF/.SF','META-INF/*.DSA'
+//}
