@@ -94,13 +94,3 @@ project(':client') {
         }
     }
 }
-
-//task (anchorHttpServerJar, dependsOn: 'classes', type: Jar) {
-//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-//    from sourceSets.test.output
-//    archivesBaseName = 'Gradle'
-//    manifest {
-//        attributes ('Main-Class': 'server.Server')
-//    }
-//    exclude 'META-INF/.RSA', 'META-INF/.SF','META-INF/*.DSA'
-//}
