@@ -1,8 +1,6 @@
-package lib;
+package lib.targets;
 
-import java.io.Serializable;
-
-public class Message implements Serializable {
+public class Message extends AbstractTarget {
 
 	private String body;
 	private User from;
@@ -38,6 +36,6 @@ public class Message implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Message{" + "body='" + body + '\'' + ", from=" + from + ", to=" + to + '}';
+		return "Message { " + "body='" + body + '\'' + ", from=" + from + ", to=" + to + " }";
 	}
 }

@@ -1,9 +1,6 @@
 package lib;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
+import java.io.*;
 import java.net.Socket;
 
 public class Connection {
@@ -15,12 +12,9 @@ public class Connection {
 		this.socket = socket;
 	}
 
-	public Connection(ServerSocket serverSocket) throws IOException {
-		this.socket = serverSocket.accept();
-	}
-
 	public Connection(String host, Integer port) throws IOException {
 		this(new Socket(host,port));
+
 	}
 
 	public Socket getSocket() {
@@ -33,18 +27,34 @@ public class Connection {
 
 	///////////// Higher level logic
 
-	public void send(Object object) throws IOException {
+	public void send(Action action) throws IOException {
 
 		ObjectOutputStream objectOutStream = new ObjectOutputStream(socket.getOutputStream());
 
-		objectOutStream.writeObject(object);
+		objectOutStream.writeObject(action);
 		objectOutStream.flush();
 	}
 
-	public Object fetch() throws IOException, ClassNotFoundException {
+	public Action fetch() throws IOException, ClassNotFoundException {
 
-		ObjectInputStream objectInStream = new ObjectInputStream(socket.getInputStream());
+		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-		return objectInStream.readObject();
+		return (Action)objectInputStream.readObject();
 	}
+
+//	private void sendJson(JSONObject json) {
+//
+//		PrintWriter printWriter = new PrintWriter(new DataOutputStream(outputStream));
+//
+//		printWriter.println(json.toString());
+//		printWriter.flush();
+//	}
+
+//	public JSONObject fetchJson() throws IOException {
+//
+//		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
+//				new DataInputStream(inputStream)));
+//
+//		return new JSONObject(bufferedReader.readLine());
+//	}
 }

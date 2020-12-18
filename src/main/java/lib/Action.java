@@ -1,26 +1,41 @@
 package lib;
 
-import lib.enums.ActionName;
+import lib.enums.OperationEnum;
 
 import java.io.Serializable;
 
 public class Action implements Serializable {
-	private ActionName name;
+	private OperationEnum type;
+	private Object target;
 
-	public Action(ActionName name) {
-		this.name = name;
+
+	public Action(OperationEnum type) {
+		this.type = type;
 	}
 
-	public ActionName getName() {
-		return name;
+	public Action(OperationEnum name, Object target) {
+		this.type = name;
+		this.target = target;
 	}
 
-	public void setName(ActionName name) {
-		this.name = name;
+	public OperationEnum getType() {
+		return type;
+	}
+
+	public void setType(OperationEnum type) {
+		this.type = type;
+	}
+
+	public Object getTarget() {
+		return target;
+	}
+
+	public void setTarget(Object target) {
+		this.target = target;
 	}
 
 	@Override
 	public String toString() {
-		return "Action{" + "name='" + name + '\'' + '}';
+		return "Action { " + "type=" + type + ", target=" + target + " }";
 	}
 }

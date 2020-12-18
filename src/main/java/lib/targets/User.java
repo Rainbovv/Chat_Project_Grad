@@ -1,8 +1,6 @@
-package lib;
+package lib.targets;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User extends AbstractTarget {
 
 	private String name;
 
@@ -20,6 +18,6 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User{" + "name='" + name + '\'' + '}';
+		return "User { " + "name='" + name + '\'' + " }";
 	}
 }
