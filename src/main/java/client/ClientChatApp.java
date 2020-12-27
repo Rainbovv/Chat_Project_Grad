@@ -2,7 +2,6 @@ package client;
 
 import lib.connections.ClientConnection;
 import lib.targets.User;
-
 import java.io.IOException;
 import java.util.Scanner;
 
