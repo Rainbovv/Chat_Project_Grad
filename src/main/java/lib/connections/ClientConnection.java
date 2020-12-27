@@ -4,7 +4,6 @@ import lib.Action;
 import lib.enums.OperationEnum;
 import lib.targets.Message;
 import lib.targets.User;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -53,17 +52,14 @@ public class ClientConnection extends AbstractConnection {
 	///////////// Higher level logic
 
 	public void send(Action action) {
-
 		super.sendAction(action, socket);
 	}
 
 	public Action fetch() throws IOException, ClassNotFoundException {
-
 		return super.fetchAction(socket);
 	}
 
 	public void start() {
-
 		getInboxObserver().start();
 
 		while (true) {
@@ -76,7 +72,6 @@ public class ClientConnection extends AbstractConnection {
 	}
 	
 	private Thread getInboxObserver() {
-
 		return new Thread(() -> {
 			try {
 				DataInputStream dataInputStream =
