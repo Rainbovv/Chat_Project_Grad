@@ -1,8 +1,6 @@
 package lib;
 
 import lib.enums.OperationEnum;
-
-
 import java.io.Serializable;
 
 public class Action implements Serializable {
@@ -20,6 +18,7 @@ public class Action implements Serializable {
 		this.target = target;
 	}
 
+	
 	public OperationEnum getType() {
 		return type;
 	}
