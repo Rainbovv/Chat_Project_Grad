@@ -9,6 +9,5 @@ public class ServerChatApp {
 
 		new ServerConnection(8888)
 			.start();
-
 	}
 }
