@@ -44,7 +44,8 @@ project(':lib') {
             java {
                 srcDir '../src/main/java'
                 include 'lib/**'
-                exclude 'lib/loggers'
+                exclude 'lib/loggers' , 'lib/connections/ServerConnection.java',
+                        'lib/connections/ClientConnection.java'
             }
         }
     }
@@ -75,7 +76,8 @@ project(':server') {
         main {
             java {
                 srcDir '../src/main/java'
-                include 'server/**', 'lib/loggers/**'
+                include 'server/**', 'lib/loggers/ServerLogger.java',
+                        'lib/connections/ServerConnection.java'
             }
         }
     }
@@ -106,7 +108,8 @@ project(':client') {
         main {
             java {
                 srcDir '../src/main/java'
-                include 'client/**', 'lib/loggers/**'
+                include 'client/**', 'lib/loggers/ClientLogger.java',
+                        'lib/connections/ClientConnection.java'
             }
         }
     }

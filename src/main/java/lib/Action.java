@@ -2,9 +2,11 @@ package lib;
 
 import lib.enums.OperationEnum;
 
+
 import java.io.Serializable;
 
 public class Action implements Serializable {
+
 	private OperationEnum type;
 	private Object target;
 
@@ -36,6 +38,6 @@ public class Action implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Action { " + "type=" + type + ", target=" + target + " }";
+		return "Action{" + " type=" + type + ", target=" + target + '}';
 	}
 }

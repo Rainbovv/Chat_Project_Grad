@@ -2,28 +2,20 @@ package lib.targets;
 
 public class Message extends AbstractTarget {
 
+	private User user;
 	private String body;
-	private User from;
-	private User to;
 
-	public Message(String body) {
+	public Message(User user, String body) {
+		this.user = user;
 		this.body = body;
 	}
 
-	public User getFrom() {
-		return from;
+	public User getUser() {
+		return user;
 	}
 
-	public void setFrom(User from) {
-		this.from = from;
-	}
-
-	public User getTo() {
-		return to;
-	}
-
-	public void setTo(User to) {
-		this.to = to;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getBody() {
@@ -36,6 +28,6 @@ public class Message extends AbstractTarget {
 
 	@Override
 	public String toString() {
-		return "Message { " + "body='" + body + '\'' + ", from=" + from + ", to=" + to + " }";
+		return "Message { " + "body='" + body + '\'' + " }";
 	}
 }
