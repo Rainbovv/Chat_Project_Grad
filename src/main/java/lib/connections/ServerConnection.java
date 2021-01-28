@@ -6,6 +6,7 @@ import lib.targets.User;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -58,16 +59,14 @@ public class ServerConnection extends AbstractConnection {
 							processSignIn(action, socket);
 							break;
 					}
-				} catch (IOException e) {
-					e.printStackTrace();
-
+				} catch (SocketException e) {
 					broadcasting(clients.get(socket).getName() +
 							" has left the room!", socket);
-
 					clients.remove(socket);
+					System.out.println("Total users >> " + clients.size());
 					return;
 
-				} catch (ClassNotFoundException e) {
+				} catch (IOException | ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
