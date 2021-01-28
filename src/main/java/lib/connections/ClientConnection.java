@@ -31,8 +31,11 @@ public class ClientConnection extends AbstractConnection {
 
 	public ClientConnection(Socket socket, User user) {
 		this.socket = socket;
-		this.user = user;
+		setUser(user);
 		send(new Action(OperationEnum.SIGN_IN, user));
+		System.out.printf("(You have been connected to the Server" +
+					"{%n    address: %s%n    port: %s%n}%n%n",
+					socket.getInetAddress(), socket.getPort());
 	}
 
 
@@ -41,6 +44,9 @@ public class ClientConnection extends AbstractConnection {
 	}
 
 	public void setUser(User user) {
+		if (user.getName().equals(""))
+			user.setName("Anonymous");
+
 		this.user = user;
 	}
 
@@ -89,7 +95,7 @@ public class ClientConnection extends AbstractConnection {
 		getInboxObserver().start();
 
 		while (true) {
-			System.out.println('[' + user.getName() + "]: ");
+			System.out.println((char)27 + "[31m" + "ERROR MESSAGE IN RED");
 			Message message = new Message(user, new Scanner(System.in).nextLine());
 
 			send(new Action(OperationEnum.MESSAGE, message));

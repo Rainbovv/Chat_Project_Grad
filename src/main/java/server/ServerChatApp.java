@@ -7,6 +7,8 @@ public class ServerChatApp {
 
 	public static void main(String[] args) throws IOException {
 
+		System.out.println("Server starting...");
+
 		new ServerConnection(8888)
 			.start();
 

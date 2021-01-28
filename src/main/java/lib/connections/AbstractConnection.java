@@ -34,7 +34,8 @@ public abstract class AbstractConnection {
 
 		ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-		return (Action)objectInputStream.readObject();
+		return (Action) objectInputStream.readObject();
+
 	}
 
 	//	private void sendJson(JSONObject json) {
