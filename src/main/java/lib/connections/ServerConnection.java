@@ -43,18 +43,15 @@ public class ServerConnection extends AbstractConnection {
 	}
 
 	private Thread getClientObserver(Socket socket) {
-
 		return new Thread(() -> {
 			while (true) {
 				try {
 					Action action = fetchAction(socket);
 
 					switch (action.getType()) {
-
 						case MESSAGE:
 							processMessage(action, socket);
 							break;
-
 						case SIGN_IN:
 							processSignIn(action, socket);
 							break;
@@ -74,22 +71,20 @@ public class ServerConnection extends AbstractConnection {
 	}
 
 	private void broadcasting(String message, Socket socketFrom) {
-
 		for (Socket socketTo: clients.keySet())
 			if (!socketTo.equals(socketFrom))
 				sendUTF(message, socketTo);
 	}
 
 	private void processMessage(Action action, Socket socket) {
-
 		Message message = (Message) action.getTarget();
+		
 		broadcasting('[' + message.getUser().getName() + "]: " +
 				message.getBody(), socket);
 
 	}
 
 	private void processSignIn(Action action, Socket socket) {
-
 		User user = (User) action.getTarget();
 
 		clients.put(socket, user);
